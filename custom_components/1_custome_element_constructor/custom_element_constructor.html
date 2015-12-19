@@ -1,0 +1,37 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html"/>
+
+<dom-module id="my-element">
+
+    <template>
+        <!-- apply element styles -->
+        <style>
+           :host{
+               display:block;
+           }
+        </style>
+
+        <div>My Name is {{name}}</div>
+    </template>
+
+    <script>
+        (function(){
+            'use strict'
+            //define the element using class constructor
+            var MyElement = Polymer.Class({
+                is:"my-element",
+                properties:{
+                    name:{
+                        type:String,
+                        value:"Nuwan"
+                    }
+                }
+            });
+            //register the element (method-1)
+            document.registerElement("my-element",MyElement);
+
+            //equivalent to
+           // var el1 = new MyElement();
+           // var el2 = document.createElement("my-element");
+        }());
+    </script>
+</dom-module>
