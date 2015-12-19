@@ -1,0 +1,25 @@
+{
+  "name": "polymer_learning",
+  "description": "This is a polymer final",
+  "main": "",
+  "moduleType": [],
+  "keywords": [
+    "Polymer"
+  ],
+  "authors": [
+    "T.D.N.Chathuranga"
+  ],
+  "license": "MIT",
+  "homepage": "index.html",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#~1.2.3"
+  }
+}
