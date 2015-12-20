@@ -1,11 +1,11 @@
 <script src="../../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
 <link rel="import" href="../../bower_components/polymer/polymer.html"/>
-
 <dom-module id="my-element">
 
     <template>
-        <!-- apply element styles -->
         <style>
+            /* CSS rules for your element */
+
             :host{
                 display: block;
                 border:1px solid black;
@@ -13,27 +13,31 @@
                 color:white;
                 padding: 10px;
             }
-        </style>
 
+        </style>
+        <div> My name is {{name}}</div>
 
     </template>
 
     <script>
         (function(){
             'use strict'
-            //define the element using class constructor
-            var MyElement = Polymer.Class({
-                is:"my-element",
-                ready:function(){
-                    console.log("Element is ready");
-                    this.textContent = "I am an element";
+            // element define and registration both done my "Polymer" function
+            var MyElement = Polymer({
+                is: "my-element",
+                properties:{
+                    name:String
+                },
+                factoryImpl:function(name){
+                  this.name=name;
                 }
-            });
-            //register the element (method-1)
-            document.registerElement("my-element",MyElement);
 
+            });
+
+           var el = new MyElement("Nuwan");
+
+        
         }());
     </script>
-</dom-module>
 
-<my-element></my-element>
+</dom-module>

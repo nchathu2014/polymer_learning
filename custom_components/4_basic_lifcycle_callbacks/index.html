@@ -1,0 +1,63 @@
+<script src="../../bower_components/webcomponentsjs/webcomponents.min.js"></script>
+<link rel="import" href="../../bower_components/polymer/polymer.html"/>
+<dom-module id="my-element">
+
+    <template>
+        <style>
+            /* CSS rules for your element */
+
+            :host{
+                display: block;
+                border:1px solid black;
+                background-color: green;
+                color:white;
+                padding: 10px;
+            }
+        </style>
+        <p>
+            Hi! I'm a Polymer element that was defined in the
+            main document!
+        </p>
+
+        <div id="myDiv">&nbsp;</div>
+
+    </template>
+
+    <script>
+        // element define and registration both done my "Polymer" function
+
+        (function(){
+            'use strict'
+
+            HTMLImports.whenReady(function(){
+              var MyElement = Polymer({
+                   is: "my-element",
+
+
+                  created:function(){
+                   console.log(this.localName + '#' +this.id+"  was created");
+                  },
+                  attached:function(){
+                      console.log(this.localName + '#' +this.id+" was attached");
+                  },
+                  detached:function(){
+
+                      console.log(this.localName + '#' +this.id+" detached");
+                  },
+                  attributeChanged:function(){
+                      console.log(this.localName + '#' + this.id + ' attribute ' + name +
+                              ' was changed to ' + this.getAttribute(name));
+                  },
+                  ready:function(){
+                      console.log(this.localName + '#' +this.id+" ready");
+                      //textContent is same as innerHTMNL
+                      this.$.myDiv.textContent="I am a text written in ready callback";
+                  }
+
+               });
+           })
+        }());
+    </script>
+</dom-module>
+
+<my-element id="my-id"></my-element>
