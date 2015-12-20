@@ -1,0 +1,50 @@
+<script src="../../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+<link rel="import" href="../../bower_components/polymer/polymer.html"/>
+
+<dom-module id="my-element">
+
+    <template>
+        <style>
+            :host{
+                display: block;
+                border:1px solid black;
+                background-color: green;
+                color:white;
+                padding: 10px;
+            }
+        </style>
+
+        <div id="msgDiv">3r</div>
+    </template>
+
+    <script>
+        document.addEventListener('WebComponentsReady', function() {
+            Polymer({
+                is: 'custom-element',
+
+                properties: {
+                    response: {
+                        type: Object,
+                        reflectToAttribute: true
+                    }
+                },
+
+                responseHandler: function(response) {
+                    this.response = 'loaded';
+                },
+
+                attributeChanged: function(prop, oldVal, newVal) {
+                    console.log(prop, 'attribute has been changed to', newVal, 'from', oldVal);
+                }
+            });
+
+            var cs = document.querySelector('custom-element');
+            cs.responseHandler();
+        });
+    </script>
+
+
+
+</dom-module>
+<custom-element response="ready"></custom-element>
+

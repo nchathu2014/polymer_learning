@@ -19,7 +19,14 @@
             main document!
         </p>
 
-        <div id="myDiv">&nbsp;</div>
+        <div id="myDiv">
+            <div id="myChildDiv">
+                &nbsp;
+                <div id="myGrandChildDiv">
+                &nbsp;
+                </div>
+            </div>
+        </div>
 
     </template>
 
@@ -39,6 +46,10 @@
                   },
                   attached:function(){
                       console.log(this.localName + '#' +this.id+" was attached");
+                      this.async(function() {
+                          // access sibling or parent elements here
+                          this.$.myGrandChildDiv.textContent="I am a myGrandChildDiv 1";
+                      });
                   },
                   detached:function(){
 
@@ -51,7 +62,10 @@
                   ready:function(){
                       console.log(this.localName + '#' +this.id+" ready");
                       //textContent is same as innerHTMNL
-                      this.$.myDiv.textContent="I am a text written in ready callback";
+                    //  this.$.myDiv.textContent="I am a myDiv";
+                      this.$.myGrandChildDiv.textContent="I am a myGrandChildDiv 2";
+
+
                   }
 
                });

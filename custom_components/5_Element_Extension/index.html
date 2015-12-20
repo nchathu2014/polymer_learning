@@ -1,0 +1,38 @@
+<script src="../../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+<link rel="import" href="../../bower_components/polymer/polymer.html"/>
+
+<dom-module id="my-element">
+
+    <template>
+        <style>
+            /* CSS rules for your element */
+            :host{
+                display: block;
+            }
+        </style>
+    </template>
+
+    <script>
+        (function(){
+            'use strict'
+            // element define and registration both done my "Polymer" function
+            var MyElement = Polymer({
+                is: "my-element",
+                name:{
+                  type:String,
+                  value:"nuwan"
+                },
+                extends:'input',
+                created:function(){
+                    this.style.padding="40px";
+                    this.style.fontSize="40px";
+                    this.style.border="5px solid red"
+
+                }
+            });
+        }());
+    </script>
+
+</dom-module>
+
+<input type="text" is="my-element"/>

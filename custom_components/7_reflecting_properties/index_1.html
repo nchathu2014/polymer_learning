@@ -1,0 +1,57 @@
+<script src="../../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+<link rel="import" href="../../bower_components/polymer/polymer.html"/>
+
+<dom-module id="my-element">
+
+    <template>
+        <style>
+            :host{
+                display: block;
+                border:1px solid black;
+                background-color: green;
+                color:white;
+                padding: 10px;
+            }
+        </style>
+
+
+        <div>{{message}}</div>
+        <div><button id="btn" on-click="clickMe">Click me</button></div>
+
+    </template>
+
+    <script>
+        (function(){
+            'use strict'
+            // element define and registration both done my "Polymer" function
+            var MyElement = Polymer({
+                is: "my-element",
+                properties:{
+
+                    message:{
+                        type:String,
+                        value:"Started!",
+                        reflectToAttribute:true
+                    }
+
+                },
+                clickMe:function(){
+                    this.message="processing started"
+                },
+                attributeChanged:function(prop,oldVal,newVal){
+
+
+                    setTimeout(function(){
+                        this.message=newVal
+                        console.log(oldVal+"-"+newVal);
+                    },3000);
+
+
+               }
+
+            });
+        }());
+    </script>
+
+</dom-module>
+<my-element user-name="Nuwan"></my-element>

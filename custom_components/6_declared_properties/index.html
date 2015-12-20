@@ -1,0 +1,55 @@
+<script src="../../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+<link rel="import" href="../../bower_components/polymer/polymer.html"/>
+
+<dom-module id="my-element">
+
+    <template>
+        <style>
+            :host{
+                display: block;
+                border:1px solid black;
+                background-color: green;
+                color:white;
+                padding: 10px;
+            }
+        </style>
+
+        <div>PI VALUE : [[PI_VAL]]</div>
+
+        <button on-click="changePIValue" on-error="onError">Change PI value</button>
+
+        <div id="msgDiv"></div>
+    </template>
+
+    <script>
+        (function(){
+            'use strict'
+            // element define and registration both done my "Polymer" function
+            var MyElement = Polymer({
+                is: "my-element",
+                properties:{
+                    PI_VAL:{
+                        type:Number,
+                        value:Math.PI,
+                        readOnly:true
+                    },
+                    userName:String,
+                    manager:{
+                        type:Boolean,
+                        value:true
+                    }
+                },
+                changePIValue:function(){
+                    //trying to change the readonly property value
+                    this.PI_VAL=1.21212;
+                },
+                ready:function(){
+                    this.$.msgDiv.textContent="My name is "+this.userName+" and I am "+((this.manager) ? 'a' : 'not a')+" manager"
+                }
+            });
+        }());
+    </script>
+
+</dom-module>
+<my-element user-name="Nuwan"></my-element>
+
