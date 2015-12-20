@@ -1,0 +1,40 @@
+<script src="../../../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+<link rel="import" href="../../../bower_components/polymer/polymer.html"/>
+
+<!--To specify DOM to use for an element’s local DOM, use the <dom-module> element.
+Give the <dom-module> an id attribute that matches its element’s is property and put a <template> inside the <dom-module>.
+Polymer will automatically clone this template’s contents into the element’s local DOM.-->
+
+<dom-module id="my-element">
+    <template>
+        <style>
+            :host{
+                display: block;
+                background-color: blue;
+                padding: 10px;
+                color:white;
+                font-size:20px;
+            }
+        </style>
+    </template>
+        <!--imperative part of the polymer component-->
+        <script>
+            (function(){
+                'use strict'
+                Polymer({
+                    is:"my-element",
+                    created:function(){
+                        this.async(function(){
+                            this.textContent="I am a web component";
+                        })
+                    }
+                });
+            }());
+        </script>
+</dom-module>
+
+<my-element></my-element>
+
+
+
+

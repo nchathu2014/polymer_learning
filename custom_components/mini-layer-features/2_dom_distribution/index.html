@@ -1,0 +1,68 @@
+<script src="../../../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+<link rel="import" href="../../../bower_components/polymer/polymer.html"/>
+
+<!--To specify DOM to use for an element’s local DOM, use the <dom-module> element.
+Give the <dom-module> an id attribute that matches its element’s is property and put a <template> inside the <dom-module>.
+Polymer will automatically clone this template’s contents into the element’s local DOM.-->
+
+<dom-module id="my-element">
+    <template>
+        <style>
+            :host{
+                display: block;
+            }
+            #child-element{
+                background-color: yellow;
+            }
+            .content-wrapper > ::content .content {
+                background: orange;
+            }
+
+            header{
+                background-color: blue;
+            }
+
+            ::content .content{
+                background-color: yellow;
+            }
+
+            footer{
+                background-color: blue;
+            }
+
+
+        </style>
+
+        <!--<div id="child-element">Child Element</div>-->
+        <!--<div class="content-wrapper">-->
+            <!--<content select=".content"></content>-->
+        <!--</div>-->
+
+
+
+            <header>I am a header</header>
+            <content select=".content"></content>
+            <footer>I am a footer</footer>
+
+
+    </template>
+    <!--imperative part of the polymer component-->
+    <script>
+        (function(){
+            'use strict'
+            Polymer({
+                is:"my-element"
+            });
+        }());
+    </script>
+</dom-module>
+
+<my-element>
+    <div class="content">I am a content</div>
+</my-element>
+
+
+
+
+
+
