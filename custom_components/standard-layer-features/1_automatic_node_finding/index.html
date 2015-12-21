@@ -1,0 +1,53 @@
+<script src="../../../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+<link rel="import" href="../../../bower_components/polymer/polymer.html"/>
+
+<dom-module id="my-element">
+    <template>
+        <style>
+            :host{
+                display: block;
+                background-color: saddlebrown;
+                padding:10px;
+                color:white;
+            }
+        </style>
+
+<div id="mainContainer">
+   <div id="name"></div>
+</div>
+
+
+
+    </template>
+    <!--imperative part of the polymer component-->
+    <script>
+        (function(){
+            'use strict'
+            Polymer({
+                is:"my-element",
+                ready:function(){
+                    //Automatic node finding for static nodes
+                    this.$.name.textContent="Static Div from Nuwan";
+
+                    //automatic node finding for dynamic nodes
+                    var element = document.createElement('span');
+                    Polymer.dom(this.$.mainContainer).appendChild(element);
+                    element.textContent="Dynamically added span";
+                    element.id="myId";
+
+                    this.$$('span').textContent="auto node finding and changed";
+
+
+                }
+            });
+        }());
+    </script>
+</dom-module>
+
+<my-element></my-element>
+
+
+
+
+
+
