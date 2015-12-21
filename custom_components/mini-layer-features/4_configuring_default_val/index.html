@@ -1,0 +1,53 @@
+<script src="../../../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+<link rel="import" href="../../../bower_components/polymer/polymer.html"/>
+
+<dom-module id="my-element">
+    <template>
+        <style>
+            :host{
+                display: block;
+            }
+        </style>
+    </template>
+    <!--imperative part of the polymer component-->
+    <script>
+        (function(){
+            'use strict'
+            Polymer({
+                is:"my-element",
+               properties:{
+                   studentName:{
+                       type:String,
+                       value:"Nuwan" //primitive as a default value
+                   },
+
+                   students:{
+                       type:Object,
+                       value:function(){
+                           return [
+                               {"sid":"100","sname":"Chameera"},
+                               {"sid":"102","sname":"Mahesh"},
+                               {"sid":"103","sname":"Dhanushka"},
+                               {"sid":"104","sname":"Shiran"},
+                               {"sid":"105","sname":"Gayan"},
+                               {"sid":"106","sname":"Nuwan"}
+                           ]
+                       }
+                   }
+               },
+                ready:function(){
+                    console.log("Student Name : "+this.studentName);
+                    console.log("Students Object : "+JSON.stringify(this.students));
+                }
+            });
+        }());
+    </script>
+</dom-module>
+
+<my-element></my-element>
+
+
+
+
+
+

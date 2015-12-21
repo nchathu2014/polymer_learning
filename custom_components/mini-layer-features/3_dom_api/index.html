@@ -1,0 +1,55 @@
+<script src="../../../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+<link rel="import" href="../../../bower_components/polymer/polymer.html"/>
+
+<dom-apis-anynode></dom-apis-anynode>
+
+<dom-module id="dom-apis-anynode">
+    <template>
+        <style>
+            :host{
+                display: block;
+            }
+
+        </style>
+
+            <span id="span1">I am Span 1</span>
+            <span id="span2">I am span 2</span>
+
+    </template>
+    <!--imperative part of the polymer component-->
+    <script>
+        (function(){
+            'use strict'
+            Polymer({
+                is:"dom-apis-anynode",
+                ready:function(){
+                    var toLight = document.createElement("div");
+                    toLight.textContent="first div";
+                    Polymer.dom(this.root).appendChild(toLight);
+
+                    //------------------------------------------
+
+                    var toLocal = document.createElement('div');
+                    toLocal.textContent="second div";
+                    var beforeNode = Polymer.dom(this.root).childNodes[0];
+                    Polymer.dom(this.root).insertBefore(toLocal, beforeNode);
+
+                    var toLocal1 = document.createElement('div');
+                    toLocal1.textContent="third div";
+                    var beforeNode1 = Polymer.dom(this.root).childNodes[4];
+                    Polymer.dom(this.root).insertBefore(toLocal1, beforeNode1);
+
+                    //-----------------------------------------------
+                    //querySelectorAll , for querySelector , $$ utility method
+
+                    var allDivs = Polymer.dom(this.root).querySelectorAll('div');
+                    var allSpans = Polymer.dom(this.root).querySelectorAll('span');
+                    console.log("All divs : "+allDivs+" All spans :"+allSpans);
+
+                }
+            });
+
+
+        }());
+    </script>
+</dom-module>

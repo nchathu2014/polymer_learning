@@ -1,0 +1,39 @@
+<script src="../../../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+<link rel="import" href="../../../bower_components/polymer/polymer.html"/>
+
+<dom-apis-localnode></dom-apis-localnode>
+
+<dom-module id="dom-apis-localnode">
+    <template>
+        <style>
+            :host{
+                display: block;
+            }
+
+        </style>
+        <div id="container">
+            <div id="first">First Div</div>
+            <content></content>
+        </div>
+    </template>
+    <!--imperative part of the polymer component-->
+    <script>
+        (function(){
+            'use strict'
+            Polymer({
+                is:"dom-apis-localnode",
+                ready:function(){
+
+                    var el = document.createElement('div');
+                    el.textContent="I am inserted div";
+                    //Polymer.dom(this.$.container).appendChild(el);
+                    /* not necessary to do this,we can use the node selector for id of the element
+                    var beforeNode = Polymer.dom(this.$.container).childNodes[0];*/
+                    Polymer.dom(this.$.container).insertBefore(el,this.$.first);
+                }
+            });
+
+
+        }());
+    </script>
+</dom-module>

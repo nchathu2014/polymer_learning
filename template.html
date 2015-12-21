@@ -1,30 +1,29 @@
-<dom-module id="element-name">
+<script src="../../../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+<link rel="import" href="../../../bower_components/polymer/polymer.html"/>
 
+<dom-module id="my-element">
     <template>
         <style>
-            /* CSS rules for your element */
-        </style>
-
-        <!-- local DOM for your element -->
-
-        <div>{{greeting}}</div> <!-- data bindings in local DOM -->
-    </template>
-
-    <script>
-        // element registration
-        Polymer({
-            is: "element-name",
-
-            // add properties and methods on the element's prototype
-
-            properties: {
-                // declare properties for the element's public API
-                greeting: {
-                    type: String,
-                    value: "Hello!"
-                }
+            :host{
+                display: block;
             }
-        });
+        </style>
+    </template>
+    <!--imperative part of the polymer component-->
+    <script>
+        (function(){
+            'use strict'
+            Polymer({
+                is:"my-element"
+            });
+        }());
     </script>
-
 </dom-module>
+
+<my-element></my-element>
+
+
+
+
+
+
