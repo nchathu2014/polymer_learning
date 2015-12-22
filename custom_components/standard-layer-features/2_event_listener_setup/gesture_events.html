@@ -1,0 +1,39 @@
+<script src="../../../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+<link rel="import" href="../../../bower_components/polymer/polymer.html"/>
+
+
+<x-foo></x-foo>
+
+<dom-module id="my-element">
+    <template>
+        <style>
+            :host{
+                display: block;
+            }
+
+        </style>
+
+
+
+    </template>
+    <!--imperative part of the polymer component-->
+    <script>
+        (function(){
+            'use strict'
+            Polymer({
+                is:"my-element"
+            });
+        }());
+    </script>
+</dom-module>
+
+
+
+
+
+
+
+
+
+
+

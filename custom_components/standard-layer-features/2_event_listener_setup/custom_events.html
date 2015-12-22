@@ -1,0 +1,48 @@
+<script src="../../../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+<link rel="import" href="../../../bower_components/polymer/polymer.html"/>
+
+
+<x-foo></x-foo>
+
+<dom-module id="x-foo">
+    <template>
+        <style>
+            :host{
+                display: block;
+            }
+
+        </style>
+
+<button on-click="handleClick">Click me</button>
+
+    </template>
+    <!--imperative part of the polymer component-->
+    <script>
+        (function(){
+            'use strict'
+            Polymer({
+                is:"x-foo",
+                handleClick:function(){
+                   this.fire('kick',{message:"I am kick message"})
+                }
+            });
+        }());
+    </script>
+</dom-module>
+
+<script>
+    document.querySelector('x-foo').addEventListener('kick',function(e){
+        console.log("MESSAGE : "+ e.detail.message);
+    });
+
+
+</script>
+
+
+
+
+
+
+
+
+

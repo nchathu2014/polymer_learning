@@ -1,0 +1,70 @@
+<script src="../../../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+<link rel="import" href="../../../bower_components/polymer/polymer.html"/>
+
+<dom-module id="my-element">
+    <template>
+        <style>
+            :host{
+                display: block;
+            }
+
+            .normal{
+                background-color: green;
+                color: white;
+            }
+            .specialStyle{
+                background-color: red;
+                color: white;
+            }
+        </style>
+
+
+          <div class="normal">I am a normal div tag</div>
+          <div>&nbsp;</div>
+          <div id="special" class="specialStyle">I am a special div tag</div>
+          <div>&nbsp;</div>
+          <div id="clickDiv">I am a click able div</div>
+          <div>&nbsp;</div>
+          <div>Click me</div>
+
+    </template>
+    <!--imperative part of the polymer component-->
+    <script>
+        (function(){
+            'use strict'
+            Polymer({
+                is:"my-element",
+                listeners:{
+                   /* 'tap': 'regularTap',
+                    'special.tap': 'specialTap',*/
+                    'click':'clickOriHandle',
+                    'clickDiv.click':'clickHandle'
+                },
+                regularTap:function(e){
+
+
+                 console.log("Normal Tap Fires : "+e);
+                },
+                specialTap:function(e){
+                    console.log("Special Tap Fires");
+                },
+                clickHandle:function(e){
+                    console.log("Clicked");
+                },
+                clickOriHandle:function(){
+                    console.log("Clicked Ori handle");
+                }
+
+
+            });
+        }());
+    </script>
+</dom-module>
+
+<my-element></my-element>
+
+
+
+
+
+

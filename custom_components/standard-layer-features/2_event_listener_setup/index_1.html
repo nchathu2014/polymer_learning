@@ -1,0 +1,43 @@
+<script src="../../../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+<link rel="import" href="../../../bower_components/polymer/polymer.html"/>
+
+<dom-module id="my-element">
+    <template>
+        <style>
+            :host{
+                display: block;
+            }
+
+        </style>
+
+
+       <div on-click="clickHandler">I am annotated event</div>
+       <div on-mouseover="mouseOverHandler">I am mouse over event</div>
+
+    </template>
+    <!--imperative part of the polymer component-->
+    <script>
+        (function(){
+            'use strict'
+            Polymer({
+                is:"my-element",
+                clickHandler:function(){
+                    alert('click event');
+                },
+                mouseOverHandler:function(){
+                    alert('mouse over');
+                }
+
+
+            });
+        }());
+    </script>
+</dom-module>
+
+<my-element></my-element>
+
+
+
+
+
+
