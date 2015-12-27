@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Deep path observation</title>
+    <script src="../../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+    <link rel="import" href="../../bower_components/polymer/polymer.html"/>
+</head>
+<body>
+
+<h2>Deep path observation</h2>
+<x-custom></x-custom>
+<dom-module id="x-custom">
+    <template>
+        <style>
+            :host{
+                display: block;
+            }
+        </style>
+    </template>
+    <!--imperative part of the polymer component-->
+    <script>
+        (function(){
+            'use strict'
+            Polymer({
+                is:"x-custom",
+                properties:{
+                    user:{
+                        type:Object
+                    }
+                },
+                observers:['userManagerChanged(user.manger.*)'],
+                userManagerChanged:function(changeRecord){
+                    if (changeRecord.base && changeRecord.path == 'user.manager') {
+                        // user.manager object itself changed
+                        console.log('new manager name is ' + changeRecord.base.name ? changeRecord.base.name : 'Unknown');
+                    } else {
+                        // sub-property of user.manager changed
+                        console.log(changeRecord.path + ' changed to ' + changeRecord.value);
+                    }
+                },
+                ready:function(){
+                    console.log(this.localName+" is ready...");
+                }
+            });
+
+            var xs = document.querySelector('x-custom');
+            // 1. event with no path
+            xs.set('user', {manager: {name: 'John Doe'}});
+
+            // 3. event with `user.manager` path
+            xs.set('user.manager', new Object);
+
+            // 2. event with `user.manager.name`
+            xs.set('user.manager.name', 'Jane Doe');
+
+            // missed fire events
+            xs.user.manager.name = 'Hong Gil';
+
+            // 4. event with no path
+            xs.set('user', undefined);
+
+            setTimeout(function(){
+              // xs.set('user', {manager: {name: 'Nuwan'}});
+            },3000);
+
+        }());
+    </script>
+</dom-module>
+
+</body>
+</html>

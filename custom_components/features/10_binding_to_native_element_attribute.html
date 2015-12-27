@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Binding to native element attribute</title>
+    <script src="../../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+    <link rel="import" href="../../bower_components/polymer/polymer.html"/>
+</head>
+<body>
+
+<h2>Binding to native element attribute</h2>
+<x-custom></x-custom>
+<dom-module id="x-custom">
+    <template>
+        <style>
+            :host{
+                display: block;
+            }
+            .enable{
+                width: 200px;
+                height:200px;
+                background-color: green;
+            }
+            .red{
+                width: 200px;
+                height:200px;
+                background-color: red;
+            }
+        </style>
+        <div class$="[[foo]]" id="divId"></div><button on-tap="changeColorHandler">Change Color</button>
+        <div style$="[[test]]" id="divId1" class="red"></div><button on-tap="changeColorHandler1">Change Color1</button>
+        <label id="bar" for$="[[bar]]">Bar</label>
+        <a href$="{{url}}">Google</a>
+    </template>
+    <!--imperative part of the polymer component-->
+    <script>
+        (function(){
+            'use strict'
+            Polymer({
+                is:"x-custom",
+                properties:{
+                  bar:{
+                    type:String,
+                    value:"Bar Value"
+                  },
+                    foo:{
+                        type:String,
+                        value:'enable'
+                    },
+                    test:{
+                        type:String,
+                        value:'border:5px solid black'
+                    },
+                   url:{
+                       type:String,
+                       value:"http://www.google.com"
+                   }
+                },
+                changeColorHandler:function(){
+                 console.log(this.$.divId.getAttribute('class'));
+
+                    if(this.$.divId.getAttribute('class')=='enable style-scope x-custom'){
+                       this.foo="red"
+                    }else{
+                        this.foo="enable"
+                    }
+                },
+                changeColorHandler1:function(){
+                    console.log(this.$.divId1.getAttribute('style'));
+
+                    if(this.$.divId1.getAttribute('style')!='none'){
+
+                        this.test='none'
+                    }else{
+                        this.test='5px solid black'
+                    }
+
+                },
+                ready:function(){
+                    console.log(this.localName+" is ready...");
+                    console.log("Attribute value : "+this.$.bar.getAttribute('for'));
+                    console.log("Attribute value : "+this.$.bar.getAttribute('href'));
+                }
+            });
+        }());
+    </script>
+</dom-module>
+
+</body>
+</html>

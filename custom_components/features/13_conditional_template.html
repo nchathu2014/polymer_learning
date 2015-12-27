@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Conditional template</title>
+    <script src="../../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+    <link rel="import" href="../../bower_components/polymer/polymer.html"/>
+</head>
+<body>
+
+<h2>Conditional template</h2>
+<x-custom></x-custom>
+<dom-module id="x-custom">
+    <template>
+        <style>
+            :host{
+                display: block;
+            }
+        </style>
+
+        <template is="dom-repeat" items="[[user]]" as="item">
+            [[item.name]]
+
+            <template is="dom-if" if="[[item.isAdmin]]">
+                admin users will see this
+
+
+            </template>
+            <hr/>
+        </template>
+
+
+
+
+    </template>
+    <!--imperative part of the polymer component-->
+    <script>
+        (function(){
+            'use strict'
+            Polymer({
+                is:"x-custom",
+                properties:{
+                    user:{
+                        type:Object,
+                        value:function(){
+                            return [{"name":"Nuwan","isAdmin":false},
+                                    {"name":"Chathuranga","isAdmin":true}]
+                        }
+                    }
+                },
+                ready:function(){
+                    console.log(this.localName+" is ready...");
+                }
+            });
+        }());
+    </script>
+</dom-module>
+
+</body>
+</html>

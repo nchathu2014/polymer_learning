@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Utility functions</title>
+    <script src="../../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+    <link rel="import" href="../../bower_components/polymer/polymer.html"/>
+</head>
+<body>
+
+<h2>Utility functions</h2>
+<element-parent name="Nuwan"></element-parent>
+
+
+<dom-module id="element-child">
+    <template>
+        <style>
+            :host{
+                display: block;
+            }
+        </style>
+    </template>
+    <!--imperative part of the polymer component-->
+    <script>
+        (function(){
+            'use strict'
+            Polymer({
+                is:"element-child",
+                ready:function(){
+                    console.log(this.localName+" is ready...");
+                    this.addEventListener('said-hello',function(e){
+                        console.log("Child element got : "+ e.detail.message);
+                    });
+                }
+            });
+        }());
+    </script>
+</dom-module>
+
+<dom-module id="element-parent">
+    <template>
+        <style>
+            :host{
+                display: block;
+            }
+        </style>
+        <div>[[name]]</div>
+        <element-child id="childElement"></element-child>
+
+    </template>
+    <!--imperative part of the polymer component-->
+    <script>
+        (function(){
+            'use strict'
+            Polymer({
+                is:"element-parent",
+                properties:{
+                  name:String
+                },
+                ready:function(){
+                    console.log(this.localName+" is ready...");
+
+                    this.$.childElement.fire('said-hello',{message:"Hi I am parent"});
+                   // this.transform('translate(100px) rotate(20deg)');
+                    this.translate3d('50px', '50px', '0', this.$.childElement)
+
+                }
+            });
+        }());
+    </script>
+</dom-module>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Annotated property binding</title>
+    <script src="../../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+    <link rel="import" href="../../bower_components/polymer/polymer.html"/>
+</head>
+<body>
+
+<h2>Annotated property binding</h2>
+<div>User View</div>
+<user-view first="Nuwan" last="Chathuranga" first-name="Thuduwage Don"></user-view>
+
+<div>Main View</div>
+<main-view></main-view>
+
+<dom-module id="user-view">
+    <template>
+        <style>
+            :host{
+                display: block;
+            }
+        </style>
+
+        <!-- Supported -->
+        <p>
+        <div>Supported</div>
+        First: <span>[[first]]</span><br>
+        Last: <span>[[last]]</span><br>
+        first-name: <span>[[firstName]]</span>
+        <br/><br/>
+        <!-- Not currently supported! -->
+        <div>Not currently supported</div>
+        <div>First: [[first]]</div>
+        <div>Last: [[last]]</div>
+        </p>
+
+    </template>
+    <!--imperative part of the polymer component-->
+    <script>
+        (function(){
+            'use strict'
+            Polymer({
+                is:"user-view",
+                properties:{
+                    first:String,
+                    last:String,
+                    firstName:String
+                },
+                ready:function(){
+                    console.log(this.localName+" is ready...");
+                }
+            });
+        }());
+    </script>
+</dom-module>
+
+<dom-module id="main-view">
+    <template>
+        <style>
+            :host{
+                display: block;
+            }
+        </style>
+
+
+        <user-view first="[[user.first]]" first-name="[[user.first]]" last="[[user.last]]"></user-view>
+
+    </template>
+    <!--imperative part of the polymer component-->
+    <script>
+        (function(){
+            'use strict'
+            Polymer({
+                is:"main-view",
+                properties:{
+                    user:{
+                        type:Object,
+                        value:{
+                            first:'Pearson',
+                            last:'Lanka'
+                        }
+
+                    }
+                },
+                ready:function(){
+                    console.log(this.localName+" is ready...");
+                }
+            });
+        }());
+    </script>
+</dom-module>
+</body>
+</html>

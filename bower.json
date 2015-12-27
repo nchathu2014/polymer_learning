@@ -20,6 +20,7 @@
     "tests"
   ],
   "dependencies": {
-    "polymer": "Polymer/polymer#~1.2.3"
+    "polymer": "Polymer/polymer#~1.2.3",
+	"test-element":"git@github.com:nchathu2014/polyserve.git"
   }
 }

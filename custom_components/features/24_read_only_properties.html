@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Readonly properties</title>
+    <script src="../../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+    <link rel="import" href="../../bower_components/polymer/polymer.html"/>
+</head>
+<body>
+
+<h2>Readonly properties</h2>
+<x-custom></x-custom>
+
+<dom-module id="x-custom">
+    <template>
+        <style>
+            :host{
+                display: block;
+            }
+        </style>
+        <div>Response : [[response]]</div>
+        <div>Name :  [[name]]</div>
+    </template>
+    <!--imperative part of the polymer component-->
+    <script>
+        (function(){
+            'use strict'
+            Polymer({
+                is:"x-custom",
+                properties:{
+                  response:{
+                      type:String,
+                      readOnly:true
+                  },
+                  name:{
+                      type:String,
+                      readOnly:true
+                  }
+                },
+                responseHandler:function(response){
+                    this._setResponse(response);
+                },
+                nameHandler:function(name){
+                   this._setName(name);
+                },
+                ready:function(){
+                    console.log(this.localName+" is ready...");
+                }
+            });
+
+            var el = document.querySelector('x-custom');
+            setTimeout(function(){
+                //el.set('response','I am data');
+                this.responseHandler("I am set data");
+                this.nameHandler("I am Nuwan");
+
+            }.bind(el),3000);
+
+        }());
+    </script>
+</dom-module>
+
+</body>
+</html>

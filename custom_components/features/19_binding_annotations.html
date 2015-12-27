@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Binding Annotations</title>
+    <script src="../../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+    <link rel="import" href="../../bower_components/polymer/polymer.html"/>
+</head>
+<body>
+
+<h2>Binding Annotations</h2>
+<x-custom></x-custom>
+<dom-module id="x-custom">
+    <template>
+        <style>
+            :host{
+                display: block;
+            }
+            .myDiv{
+                width: 200px;
+                height: 200px;
+                background-color: green;
+            }
+        </style>
+
+        <div  class="myDiv" hidden="[[isHidden]]"></div>
+
+    </template>
+    <!--imperative part of the polymer component-->
+    <script>
+        (function(){
+            'use strict'
+            Polymer({
+                is:"x-custom",
+                properties:{
+                    isHidden:{
+                        type:Boolean,
+                        value:false
+                    }
+                },
+                ready:function(){
+                    console.log(this.localName+" is ready...");
+                    setInterval(function(){
+                        this.isHidden=!this.isHidden;
+                    }.bind(this),300);
+                }
+            });
+
+
+
+        }());
+    </script>
+</dom-module>
+
+</body>
+</html>

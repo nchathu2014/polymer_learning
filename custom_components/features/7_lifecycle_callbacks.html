@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lifecycle callbacks</title>
+    <script src="../../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+    <link rel="import" href="../../bower_components/polymer/polymer.html"/>
+</head>
+<body>
+
+<h2>Lifecycle callbacks</h2>
+<x-custom></x-custom>
+<dom-module id="x-custom">
+    <template>
+        <style>
+            :host{
+                display: block;
+            }
+        </style>
+
+        [[pi]] <br/>
+        <button on-tap="handleName">Change Me</button>
+
+    </template>
+    <!--imperative part of the polymer component-->
+    <script>
+        (function(){
+            'use strict'
+            Polymer({
+                is:"x-custom",
+               properties:{
+                   pi:{
+                       value:Math.PI,
+                       reflectToAttribute:true
+                   }
+               },
+                handleName:function(){
+                  this.pi=Math.random();
+                },
+                created:function(){
+                    console.log(this.localName+" is created...");
+                },
+                ready:function(){
+                    console.log(this.localName+" is ready...");
+                },
+                attached:function(){
+                    console.log(this.localName+" is attached...");
+
+                },
+                attributeChanged:function(propname,oldvalue,newvalue){
+                    console.log(this.localName+" is attributeChanged..."+propname+'--'+oldvalue+'--'+newvalue);
+                },
+                detached:function(){
+                    console.log(this.localName+" is detached...");
+                }
+            });
+        }());
+    </script>
+</dom-module>
+
+</body>
+</html>

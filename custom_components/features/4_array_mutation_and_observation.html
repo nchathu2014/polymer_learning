@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Array Mutation</title>
+    <script src="../../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+    <link rel="import" href="../../bower_components/polymer/polymer.html"/>
+</head>
+<body>
+
+<h2>Array Mutation</h2>
+<x-custom></x-custom>
+<dom-module id="x-custom">
+    <template>
+        <style>
+            :host{
+                display: block;
+            }
+
+            :host .userDiv{
+                background-color: indigo;
+                color: white;
+                font-size: 20px;
+                width: 400px;
+                padding: 20px;
+                -webkit-border-radius: 10px;
+                -moz-border-radius: 10px;
+                border-radius: 10px;
+            }
+        </style>
+
+      <div class="mainWrapper">
+          <div>User List</div>
+          <input type="text" id="userId"/><button on-tap="handleOnTap">Add to List</button>
+          <hr/>
+        <template is="dom-repeat" items="[[users]]" as="user">
+           <div class="userDiv">[[user]]</div>
+           <div>&nbsp;</div>
+        </template>
+
+      </div>
+
+
+
+    </template>
+    <!--imperative part of the polymer component-->
+    <script>
+        (function(){
+            'use strict'
+            Polymer({
+                is:"x-custom",
+                properties:{
+                    users:{
+                        type:Array,
+                        value:function(){
+                            return ["nuwan","chathuranga"]
+                        },
+                        notify:true
+                    }
+                },
+                handleDelete:function(){
+                    console.log("handleDelete fires ");
+                },
+                handleOnTap:function(){
+
+                    if(this.$.userId.value != null && this.$.userId.value != ""){
+                        console.log("handleOnTap fires"+this.$.userId.value);
+                        this.push('users',this.$.userId.value);
+                        this.$.userId.value = "";
+                    }else{
+                        alert("Enter a user name");
+                    }
+                },
+                ready:function(){
+                    console.log(this.localName+" is ready...");
+                }
+            });
+        }());
+    </script>
+</dom-module>
+
+</body>
+</html>

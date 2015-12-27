@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Behaviour mixin</title>
+    <script src="../../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+    <link rel="import" href="../../bower_components/polymer/polymer.html"/>
+</head>
+<body>
+
+<h2>Behaviour mixin</h2>
+<x-custom></x-custom>
+<dom-module id="x-custom">
+    <template>
+        <style>
+            :host{
+                display: block;
+            }
+            .highlighted {
+                color: red;
+                font-weight: 800;
+            }
+        </style>
+
+
+
+
+    </template>
+    <!--imperative part of the polymer component-->
+    <script>
+        (function(){
+            'use strict'
+            Polymer({
+                is:"x-custom",
+                properties: {
+                    isHighlighted: {
+                        type: Boolean,
+                        value: false,
+                        notify: true,
+                        observer: '_highlightChanged'
+                    }
+                },
+
+                listeners: {
+                    click: '_toggleHighlight'
+                },
+
+                created: function() {
+                    console.log('Highlighting for ', this, 'enabled!');
+
+                },
+                ready:function(){
+                    this.innerHTML="wwwwwwwwwwwwwwwww";
+                },
+
+                _toggleHighlight: function() {
+                    this.isHighlighted = !this.isHighlighted;
+                },
+
+                _highlightChanged: function(value) {
+                    this.toggleClass('highlighted', value);
+                }
+            });
+        }());
+    </script>
+</dom-module>
+
+</body>
+</html>

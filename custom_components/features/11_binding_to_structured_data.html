@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Binding to Structured Data</title>
+    <script src="../../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+    <link rel="import" href="../../bower_components/polymer/polymer.html"/>
+</head>
+<body>
+
+<h2>Binding to Structured Data</h2>
+<x-custom></x-custom>
+
+
+
+
+<dom-module id="user-element">
+
+    <template>
+        <div>[[user.manager.name]]</div>
+    </template>
+    <script>
+        (function(){
+            'use strict'
+            Polymer({
+                is:"user-element",
+                ready:function(){
+                    console.log(this.localName+" is ready...");
+                }
+            });
+        }());
+    </script>
+</dom-module>
+
+<dom-module id="x-custom">
+    <template>
+      <user-element user="[[user]]"></user-element>
+    </template>
+    <!--imperative part of the polymer component-->
+    <script>
+        (function(){
+            'use strict'
+            Polymer({
+                is:"x-custom",
+                properties:{
+                    user:{
+                        type:Object,
+                        value:{
+                            manager:{
+                                name:'T.D.Nuwan Chathuranga'
+                            }
+                        }
+                    }
+                },
+                ready:function(){
+                    console.log(this.localName+" is ready...");
+                }
+            });
+        }());
+    </script>
+</dom-module>
+
+</body>
+</html>

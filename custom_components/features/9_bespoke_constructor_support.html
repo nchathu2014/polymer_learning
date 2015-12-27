@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>bespoke_constructor_support</title>
+    <script src="../../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+    <link rel="import" href="../../bower_components/polymer/polymer.html"/>
+</head>
+<body>
+
+<h2>Bespoke constructor support</h2>
+<x-custom></x-custom>
+<dom-module id="x-custom">
+    <template>
+        <style>
+            :host{
+                display: block;
+            }
+        </style>
+    </template>
+    <!--imperative part of the polymer component-->
+    <script>
+        (function(){
+            'use strict'
+            var MyElement =  Polymer({
+                is:"x-custom",
+
+                //element initialization order
+
+                /*
+                *   created
+                *   local DOM initialization
+                *   ready
+                *   factoryImpl <<<<-----------------------this only fires when bespoke constructor invoked
+                *   attached
+                *
+                * */
+
+                factoryImpl:function(name,id){
+                    this.displayName(name);
+                    this.displayId(id);
+                },
+                displayName:function(name){
+                    document.write("Name : "+name+"<br/>");
+                },
+                displayId:function(id){
+                    document.write("ID : "+id+"<br/>");
+                },
+                ready:function(){
+                    console.log(this.localName+" is ready...");
+                }
+            });
+
+            var el = new MyElement("Nuwan",123);
+            document.write("<hr/>");
+            var el1 = new MyElement("Chathuranga",1234);
+            document.write("<hr/>");
+            var el1 = new MyElement("Dasuni",1234567890);
+        }());
+    </script>
+</dom-module>
+
+</body>
+</html>

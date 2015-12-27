@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Custom css properties</title>
+    <script src="../../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+    <link rel="import" href="../../bower_components/polymer/polymer.html"/>
+</head>
+<body>
+
+<h2>Custom css properties</h2>
+<x-custom></x-custom>
+
+<dom-module id="my-toolbar">
+    <template>
+        <style>
+            :host{
+                display: block;
+                background-color: gray;
+                padding: 20px;
+            }
+
+            .title {
+                color: var(--my-toolbar-title-color);
+                background-color: var(--my-toolbar-title-background-color);
+            }
+
+        </style>
+
+       <div class="title">[[label]]</div>
+
+    </template>
+    <!--imperative part of the polymer component-->
+    <script>
+        (function(){
+            'use strict'
+            Polymer({
+                is:"my-toolbar",
+                properties:{
+                   label:String
+
+                },
+                ready:function(){
+                    console.log(this.localName+" is ready...");
+                }
+            });
+        }());
+    </script>
+</dom-module>
+
+<dom-module id="x-custom">
+    <template>
+        <style>
+            :host{
+                --my-toolbar-title-color:green;
+                --my-toolbar-title-background-color:black;
+            }
+
+            .warning{
+                --my-toolbar-title-color:red;
+            }
+        </style>
+
+        <my-toolbar label="This one is green."></my-toolbar>
+        <my-toolbar class="warning"  label="This one is green."></my-toolbar>
+
+    </template>
+    <!--imperative part of the polymer component-->
+    <script>
+        (function(){
+            'use strict'
+            Polymer({
+                is:"x-custom",
+                ready:function(){
+                    console.log(this.localName+" is ready...");
+                }
+            });
+        }());
+    </script>
+</dom-module>
+
+</body>
+</html>
